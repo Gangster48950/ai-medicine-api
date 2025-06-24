@@ -1,0 +1,7 @@
+{
+  "diabetes": ["Metformin", "Insulin"],
+  "asthma": ["Albuterol", "Fluticasone"],
+  "hypertension": ["Lisinopril", "Amlodipine"],
+  "flu": ["Oseltamivir", "Ibuprofen"],
+  "arthritis": ["Ibuprofen", "Naproxen"]
+}
