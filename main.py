@@ -7,11 +7,17 @@ import uvicorn
 
 app = FastAPI()
 
+# Load medicine database
 with open("diseases_meds.json") as f:
     disease_db = json.load(f)
 
+# Input model
 class SymptomInput(BaseModel):
     symptoms: str
+
+@app.get("/")
+def home():
+    return {"message": "AI Medicine API is running."}
 
 @app.post("/suggest")
 def suggest_medicine(data: SymptomInput):
@@ -30,9 +36,7 @@ def suggest_medicine(data: SymptomInput):
             "disclaimer": "This tool is for educational purposes only."
         }
 
-# ✅ This part is needed to bind the correct port on Render
+# ✅ Required by Render to bind the correct port
 if __name__ == "__main__":
-    import uvicorn
-    import os
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run("main:app", host="0.0.0.0", port=port)
