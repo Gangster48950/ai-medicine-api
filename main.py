@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import json
 from disease_model import detect_disease
+import os
+import uvicorn
 
 app = FastAPI()
 
@@ -27,3 +29,8 @@ def suggest_medicine(data: SymptomInput):
             "message": "No matching condition found. Please consult a doctor.",
             "disclaimer": "This tool is for educational purposes only."
         }
+
+# ✅ This part is needed to bind the correct port on Render
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
